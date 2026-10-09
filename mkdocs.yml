@@ -1,0 +1,114 @@
+site_name: 操作系统导论：三个简单部件
+site_description: "OSTEP (Operating Systems: Three Easy Pieces) 中文翻译 · Part I 虚拟化"
+site_author: OSTEP 中文翻译计划
+docs_dir: docs
+site_dir: build
+# 输出明确的 .html 链接，使 build/index.html 通过 file:// 打开时也能前后翻页。
+use_directory_urls: false
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+  - glightbox
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - assets/js/mathjax.js
+  - assets/js/theme-toggle.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - assets/css/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/remzi-arpacidusseau/ostep
+      name: OSTEP 原书仓库
+
+copyright: 原作 © 2008–18 Arpaci-Dusseau。本译本仅供学习交流，版权归原作者所有。
+
+nav:
+  - 首页: index.md
+  - 前言:
+      - 致所有人: preface/to-everyone.md
+      - 致讲师: preface/to-educators.md
+      - 致学生: preface/to-students.md
+      - 致谢: preface/acknowledgments.md
+      - 结束语: preface/final-words.md
+  - 概述:
+      - 第 1 章 关于本书的对话: 01-dialogue-on-the-book.md
+      - 第 2 章 操作系统导论: 02-introduction.md
+  - 第一部分 虚拟化:
+      - 第 3 章 关于虚拟化的对话: 03-dialogue-on-virtualization.md
+      - 第 4 章 抽象：进程: 04-the-process.md
+      - 第 5 章 插曲：进程 API: 05-process-api.md
+      - 第 6 章 机制：受限制的直接执行: 06-limited-direct-execution.md
+      - 第 7 章 调度：介绍: 07-scheduling-introduction.md
+      - 第 8 章 调度：多级反馈队列: 08-mlfq.md
+      - 第 9 章 调度：比例份额: 09-proportional-share.md
+      - 第 10 章 多处理器调度（高级）: 10-multiprocessor-scheduling.md
+      - 第 11 章 CPU 虚拟化总结对话: 11-summary-dialogue-cpu.md
+      - 第 12 章 关于内存虚拟化的对话: 12-dialogue-on-memory-virtualization.md
+      - 第 13 章 抽象：地址空间: 13-address-spaces.md
+      - 第 14 章 插曲：内存 API: 14-memory-api.md
+      - 第 15 章 机制：地址转换: 15-address-translation.md
+      - 第 16 章 分段: 16-segmentation.md
+      - 第 17 章 空闲空间管理: 17-free-space-management.md
+      - 第 18 章 分页：介绍: 18-paging-introduction.md
+      - 第 19 章 分页：快速地址转换（TLB）: 19-tlbs.md
+      - 第 20 章 分页：较小的表: 20-smaller-tables.md
+      - 第 21 章 超越物理内存：机制: 21-beyond-physical-memory-mechanisms.md
+      - 第 22 章 超越物理内存：策略: 22-beyond-physical-memory-policies.md
+      - 第 23 章 完整虚拟内存系统: 23-complete-vm-systems.md
+      - 第 24 章 内存虚拟化总结对话: 24-summary-dialogue-memory.md
+  - 译注:
+      - 术语对照表: glossary.md
+      - 翻译风格指南: style-guide.md

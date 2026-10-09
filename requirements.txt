@@ -1,0 +1,5 @@
+# OSTEP Chinese translation - Python dependencies
+# Install: & "C:\Pythons\Python312\python3.exe" -m pip install -r requirements.txt
+mkdocs-material>=9.5,<10
+jieba>=0.42
+mkdocs-glightbox>=0.4

@@ -1,0 +1,46 @@
+# MkDocs 构建产物与发布目录
+/build/
+/site/
+/dist/
+
+# 原文抽取、渲染与任务临时文件
+/extraction/
+/tmp/
+/temp/
+/output/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.log
+*~
+
+# Python 缓存、测试产物和本地虚拟环境
+__pycache__/
+*.py[cod]
+*$py.class
+/.venv/
+/venv/
+/env/
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+/.coverage
+/htmlcov/
+*.egg-info/
+
+# 可选的前端工具依赖
+/node_modules/
+
+# 编辑器与 IDE 本地配置
+/.vscode/
+/.idea/
+*.swp
+*.swo
+
+# 操作系统生成文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
