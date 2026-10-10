@@ -1,5 +1,5 @@
 site_name: 操作系统导论：三个简单部件
-site_description: "OSTEP (Operating Systems: Three Easy Pieces) 中文翻译 · Part I 虚拟化"
+site_description: "OSTEP (Operating Systems: Three Easy Pieces) 中文翻译 · 虚拟化与并发"
 site_author: OSTEP 中文翻译计划
 docs_dir: docs
 site_dir: build
@@ -109,6 +109,17 @@ nav:
       - 第 22 章 超越物理内存：策略: 22-beyond-physical-memory-policies.md
       - 第 23 章 完整虚拟内存系统: 23-complete-vm-systems.md
       - 第 24 章 内存虚拟化总结对话: 24-summary-dialogue-memory.md
+  - 第二部分 并发:
+      - 第 25 章 关于并发的对话: 25-dialogue-on-concurrency.md
+      - 第 26 章 并发：介绍: 26-concurrency-introduction.md
+      - 第 27 章 插曲：线程 API: 27-thread-api.md
+      - 第 28 章 锁: 28-locks.md
+      - 第 29 章 基于锁的并发数据结构: 29-lock-based-concurrent-data-structures.md
+      - 第 30 章 条件变量: 30-condition-variables.md
+      - 第 31 章 信号量: 31-semaphores.md
+      - 第 32 章 常见并发问题: 32-common-concurrency-problems.md
+      - 第 33 章 基于事件的并发（高级）: 33-event-based-concurrency.md
+      - 第 34 章 并发总结对话: 34-summary-dialogue-concurrency.md
   - 译注:
       - 术语对照表: glossary.md
       - 翻译风格指南: style-guide.md

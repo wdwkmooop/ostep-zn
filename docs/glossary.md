@@ -84,6 +84,10 @@
 | process group | 进程组 | |
 | thread | 线程 | |
 | multi-threaded | 多线程的 | |
+| multi-threaded application | 多线程应用程序 | |
+| thread control block (TCB) | 线程控制块 (TCB) | |
+| thread-local storage | 线程局部存储 | 本书 ch26 语境下主要指各线程自己的栈 |
+| parallelism / parallelization | 并行 / 并行化 | 与并发区分 |
 | multiprogramming | 多道程序设计 | |
 | restricted operation | 受限操作 | |
 | privileged operation | 特权操作 | |
@@ -96,6 +100,67 @@
 | yield | 主动让出 | `yield` 系统调用保留英文标识符 |
 | disable interrupts | 禁用中断 | |
 | locking | 加锁 | 保护并发访问 |
+
+## 并发 / 同步
+
+| English | 中文 | 说明 |
+|---|---|---|
+| critical section | 临界区 | 访问共享资源且不能由多线程同时执行的代码 |
+| race condition / data race | 竞争条件 / 数据竞争 | 后者特指共享数据上的竞争 |
+| mutual exclusion | 互斥 | 同时只允许一条线程进入临界区 |
+| synchronization primitive | 同步原语 | |
+| atomic operation | 原子操作 | 全有或全无，不暴露中间状态 |
+| transaction | 事务 | 一组被视作原子整体的操作 |
+| mutex | 互斥量 | POSIX 锁类型 |
+| fairness | 公平性 | 评价锁的标准之一 |
+| spin-waiting / spin lock | 自旋等待 / 自旋锁 | |
+| test-and-set | 测试并设置 | 亦称 atomic exchange（原子交换） |
+| compare-and-swap (CAS) | 比较并交换 (CAS) | x86 亦称 compare-and-exchange |
+| load-linked / store-conditional (LL/SC) | 链接式加载 / 条件式存储 (LL/SC) | |
+| fetch-and-add | 取并加 | 原子递增并返回旧值 |
+| ticket lock | 票号锁 | 按取号次序获取锁 |
+| yield | 主动让出 | `yield()` 标识符保留英文 |
+| park / unpark | 睡眠 / 唤醒 | API 名 `park()` / `unpark()` 保留英文 |
+| wakeup/waiting race | 唤醒/等待竞争 | |
+| priority inversion | 优先级反转 | |
+| priority inheritance | 优先级继承 | |
+| futex | futex | Linux 快速用户空间互斥机制，保留英文 |
+| two-phase lock | 两阶段锁 | 先自旋，失败后睡眠 |
+| spurious wakeup | 虚假唤醒 | 条件变量等待可能在条件未满足时返回 |
+| deadlock | 死锁 | |
+| thread-safe | 线程安全 | |
+| condition variable | 条件变量 | |
+| monitor | 管程 | 锁与条件变量组成的同步结构 |
+| Mesa semantics | Mesa 语义 | 发信号只把等待者变为就绪；醒来后须重新检查条件 |
+| Hoare semantics | Hoare 语义 | 发信号后立即把执行权交给被唤醒线程 |
+| covering condition | 覆盖条件 | 用更宽泛的唤醒条件覆盖多个具体等待条件 |
+| perfect scaling | 完美扩展 | 工作量随处理器数增长而完成时间不增 |
+| approximate counter | 近似计数器 | 以一定精度换取可扩展性 |
+| hand-over-hand locking / lock coupling | 逐手加锁 / 锁耦合 | 遍历结构时逐节点交接锁 |
+| semaphore | 信号量 | 由整数值及 `wait`/`post` 操作组成 |
+| binary semaphore | 二值信号量 | 可用作锁 |
+| producer/consumer problem | 生产者—消费者问题 | 亦称有界缓冲区问题 |
+| bounded buffer | 有界缓冲区 | |
+| reader-writer lock | 读写锁 | 允许多个读者或一个写者 |
+| dining philosophers problem | 哲学家就餐问题 | 经典同步问题 |
+| atomicity violation | 原子性违反 | 本应原子执行的访问序列被打断 |
+| order violation | 顺序违反 | 所需的跨线程执行顺序未被保证 |
+| hold-and-wait | 持有并等待 | 死锁的必要条件之一 |
+| no preemption | 不可抢占 | 死锁的必要条件之一 |
+| circular wait | 循环等待 | 死锁的必要条件之一 |
+| livelock | 活锁 | 线程持续活动却没有实质进展 |
+| lock-free / wait-free | 无锁 / 无等待 | 不依赖显式锁的并发方法 |
+| deadlock prevention / avoidance | 死锁预防 / 死锁避免 | 前者破坏必要条件，后者安排安全执行 |
+| event-based concurrency | 基于事件的并发 | |
+| event loop | 事件循环 | |
+| event handler | 事件处理程序 | |
+| blocking / non-blocking | 阻塞 / 非阻塞 | 描述调用是否等待工作完成后才返回 |
+| synchronous / asynchronous | 同步 / 异步 | 本章用于 I/O 接口 |
+| asynchronous I/O (AIO) | 异步 I/O (AIO) | |
+| polling / interrupt | 轮询 / 中断 | 检查事件完成状态的两类方法 |
+| signal / signal handler | 信号 / 信号处理程序 | UNIX 进程通知机制 |
+| manual stack management | 手工栈管理 | 事件程序显式保存跨事件状态 |
+| continuation | 续体 | 保存恢复计算所需状态的程序结构 |
 
 ## 调度
 

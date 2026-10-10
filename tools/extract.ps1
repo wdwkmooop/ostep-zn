@@ -25,7 +25,14 @@ $ErrorActionPreference = "Stop"
 
 $PdfText = "D:\texlive\2026\bin\windows\pdftotext.exe"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$Pdf = Join-Path (Split-Path -Parent $ProjectRoot) "ostep part1.pdf"
+$SourceRoot = Split-Path -Parent $ProjectRoot
+$Pdf = if ($Chapter -le 24) {
+    Join-Path $SourceRoot "ostep part1.pdf"
+} elseif ($Chapter -le 34) {
+    Join-Path $SourceRoot "ostep part2.pdf"
+} else {
+    Join-Path $SourceRoot "ostep part3.pdf"
+}
 
 if (-not (Test-Path -LiteralPath $PdfText)) { throw "找不到 pdftotext.exe: $PdfText" }
 if (-not (Test-Path -LiteralPath $Pdf)) { throw "找不到原书 PDF: $Pdf" }
@@ -40,6 +47,9 @@ $PageMap = @{
     13 = @(139, 147); 14 = @(148, 157); 15 = @(158, 171); 16 = @(172, 182)
     17 = @(183, 199); 18 = @(200, 212); 19 = @(213, 228); 20 = @(229, 243)
     21 = @(244, 254); 22 = @(255, 271); 23 = @(272, 289); 24 = @(290, 292)
+    25 = @(3, 4);      26 = @(5, 19);    27 = @(20, 31);   28 = @(32, 53)
+    29 = @(54, 67);    30 = @(68, 83);   31 = @(84, 101);  32 = @(102, 117)
+    33 = @(118, 128);  34 = @(129, 130)
 }
 
 if ($StartPage -le 0 -or $EndPage -le 0) {

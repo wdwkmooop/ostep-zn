@@ -30,7 +30,14 @@ $ErrorActionPreference = "Stop"
 
 $Pdftoppm = "D:\texlive\2026\bin\windows\pdftoppm.exe"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$Pdf = Join-Path (Split-Path -Parent $ProjectRoot) "ostep part1.pdf"
+$SourceRoot = Split-Path -Parent $ProjectRoot
+$Pdf = if ($Chapter -le 24) {
+    Join-Path $SourceRoot "ostep part1.pdf"
+} elseif ($Chapter -le 34) {
+    Join-Path $SourceRoot "ostep part2.pdf"
+} else {
+    Join-Path $SourceRoot "ostep part3.pdf"
+}
 $CropsFile = Join-Path $PSScriptRoot "crops.json"
 $DefaultDpi = 300
 $DefaultPaddingRatio = 0.10
