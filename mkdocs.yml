@@ -1,8 +1,10 @@
 site_name: 操作系统导论：三个简单部件
-site_description: "OSTEP (Operating Systems: Three Easy Pieces) 中文翻译 · 虚拟化与并发"
+site_description: "OSTEP (Operating Systems: Three Easy Pieces) 中文翻译 · 虚拟化、并发与持久化"
 site_author: OSTEP 中文翻译计划
 docs_dir: docs
 site_dir: build
+exclude_docs: |
+  style-guide.md
 # 输出明确的 .html 链接，使 build/index.html 通过 file:// 打开时也能前后翻页。
 use_directory_urls: false
 
@@ -120,6 +122,32 @@ nav:
       - 第 32 章 常见并发问题: 32-common-concurrency-problems.md
       - 第 33 章 基于事件的并发（高级）: 33-event-based-concurrency.md
       - 第 34 章 并发总结对话: 34-summary-dialogue-concurrency.md
+  - 第三部分 持久化:
+      - 第 35 章 关于持久化的对话: 35-dialogue-on-persistence.md
+      - 第 36 章 I/O 设备: 36-io-devices.md
+      - 第 37 章 硬盘驱动器: 37-hard-disk-drives.md
+      - 第 38 章 廉价冗余磁盘阵列（RAID）: 38-raids.md
+      - 第 39 章 插叙：文件与目录: 39-files-and-directories.md
+      - 第 40 章 文件系统实现: 40-file-system-implementation.md
+      - 第 41 章 局部性与快速文件系统: 41-locality-and-ffs.md
+      - 第 42 章 崩溃一致性：FSCK 与日志: 42-crash-consistency-fsck-and-journaling.md
+      - 第 43 章 日志结构文件系统: 43-log-structured-file-systems.md
+      - 第 44 章 基于闪存的 SSD: 44-flash-based-ssds.md
+      - 第 45 章 数据完整性与保护: 45-data-integrity-and-protection.md
+      - 第 46 章 持久化总结对话: 46-summary-dialogue-persistence.md
+      - 第 47 章 关于分布式的对话: 47-dialogue-on-distribution.md
+      - 第 48 章 分布式系统: 48-distributed-systems.md
+      - 第 49 章 Sun 网络文件系统（NFS）: 49-nfs.md
+      - 第 50 章 Andrew 文件系统（AFS）: 50-afs.md
+      - 第 51 章 分布式总结对话: 51-summary-dialogue-distribution.md
+  - 附录:
+      - 附录 A 关于虚拟机监控器的对话: appendix-a-dialogue-vmm.md
+      - 附录 B 虚拟机监控器: appendix-b-virtual-machine-monitors.md
+      - 附录 C 关于管程的对话: appendix-c-dialogue-monitors.md
+      - 附录 D 管程（已弃用）: appendix-d-monitors-deprecated.md
+      - 附录 E 关于实验的对话: appendix-e-dialogue-labs.md
+      - 附录 F 实验：教程: appendix-f-laboratory-tutorial.md
+      - 附录 G 实验：系统项目: appendix-g-laboratory-systems-projects.md
+      - 附录 H 实验：xv6 项目: appendix-h-laboratory-xv6-projects.md
   - 译注:
       - 术语对照表: glossary.md
-      - 翻译风格指南: style-guide.md

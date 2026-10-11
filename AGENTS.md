@@ -8,11 +8,9 @@
 
 ## 0. 一句话说明
 
-把 OSTEP（*Operating Systems: Three Easy Pieces*, v1.00/1.01）的 **Part I 虚拟化**（前言 + 第 1~24 章）
+把 OSTEP（*Operating Systems: Three Easy Pieces*, v1.00/1.01）
 翻译成中文，以 **Markdown 为唯一真源**，用 **MkDocs Material** 生成**静态 HTML** 站点。
 
-当前范围：**只做 Part I（虚拟化）**。并发（Part II）、持久化（Part III）暂不在范围内，
-但目录结构已预留，将来可扩展。
 
 ---
 
@@ -21,8 +19,8 @@
 ```
 ostep/                               ← 项目根（工作目录）
 ├─ ostep part1.pdf                   ← 原书 Part I（虚拟化），292 页
-├─ ostep part2.pdf                   ← 原书 Part II（并发），130 页（暂不用）
-├─ ostep part3.pdf                   ← 原书 Part III（持久化），286 页（暂不用）
+├─ ostep part2.pdf                   ← 原书 Part II（并发），130 页
+├─ ostep part3.pdf                   ← 原书 Part III（持久化与分布式系统），286 页；正文范围为第 35~51 章
 ├─ ostep-ch.docx                     ← 【作者旧稿】已译 26.5~28.6（并发），仅作**行文风格参考**
 └─ ostep-zh/                         ← 我们的翻译工程
    ├─ AGENTS.md                      ← 本文件
@@ -35,7 +33,7 @@ ostep/                               ← 项目根（工作目录）
    └─ docs/                          ← ★ 所有译文 Markdown 与素材
       ├─ index.md                    ← 首页
       ├─ glossary.md                 ← 术语对照表（**必读，先查再译**）
-      ├─ style-guide.md              ← 翻译风格与规范（**必读**）
+      ├─ style-guide.md              ← 本地翻译风格与规范（**必读；已忽略，禁止提交**）
       ├─ preface/                    ← 前言、致讲师、致学生、致谢
       ├─ 02-introduction.md ...      ← 正文各章（命名见 §4）
       ├─ assets/css/extra.css        ← 自定义样式（crux/边栏/对话框）
@@ -120,7 +118,9 @@ powershell -ExecutionPolicy Bypass -File .\tools\build.ps1
 7. **更新 `progress.md`**：把该章状态从 `未开始/翻译中` 改为 `已完成`，并记下拉取页区间、
    图数、遗留问题。
 
-> 一次只推进**一到两章**，做完一章交作者抽查后再继续；不要一次性批量翻很多章。
+> Part III 正文按用户指定的节奏推进：**每批四章**；第 51 章单独收尾。附录 A~H 也纳入
+> 翻译范围，继续按**每批四篇附录**推进（A~D、E~H）。每批全部达到完成标准并交作者抽查后，
+> 再继续下一批；不要跨批次铺开未完成译文。
 
 ---
 
@@ -159,6 +159,34 @@ docs/21-beyond-physical-memory-mechanisms.md
 docs/22-beyond-physical-memory-policies.md
 docs/23-complete-vm-systems.md
 docs/24-summary-dialogue-memory.md
+docs/25-dialogue-on-concurrency.md
+...
+docs/34-summary-dialogue-concurrency.md
+docs/35-dialogue-on-persistence.md
+docs/36-io-devices.md
+docs/37-hard-disk-drives.md
+docs/38-raids.md
+docs/39-files-and-directories.md
+docs/40-file-system-implementation.md
+docs/41-locality-and-ffs.md
+docs/42-crash-consistency-fsck-and-journaling.md
+docs/43-log-structured-file-systems.md
+docs/44-flash-based-ssds.md
+docs/45-data-integrity-and-protection.md
+docs/46-summary-dialogue-persistence.md
+docs/47-dialogue-on-distribution.md
+docs/48-distributed-systems.md
+docs/49-nfs.md
+docs/50-afs.md
+docs/51-summary-dialogue-distribution.md
+docs/appendix-a-dialogue-vmm.md
+docs/appendix-b-virtual-machine-monitors.md
+docs/appendix-c-dialogue-monitors.md
+docs/appendix-d-monitors-deprecated.md
+docs/appendix-e-dialogue-labs.md
+docs/appendix-f-laboratory-tutorial.md
+docs/appendix-g-laboratory-systems-projects.md
+docs/appendix-h-laboratory-xv6-projects.md
 ```
 
 新增/改名后，**必须同步更新 `mkdocs.yml` 的 `nav:`**，否则该页不会出现在站点导航里。
@@ -187,11 +215,49 @@ docs/24-summary-dialogue-memory.md
 | 第 7 章 调度：介绍 | 125–136 | 第 24 章 内存虚拟化总结对话 | 290–292 |
 | 第 12 章 关于内存虚拟化的对话 | 137–138 | | |
 
+`ostep part2.pdf`（Part II）和 `ostep part3.pdf`（Part III）的正文页区间如下：
+
+| 内容 | PDF 页 | 内容 | PDF 页 |
+|---|---|---|---|
+| 第 25 章 关于并发的对话 | Part II 3–4 | 第 35 章 关于持久化的对话 | Part III 3–4 |
+| 第 26 章 并发：介绍 | Part II 5–19 | 第 36 章 I/O 设备 | Part III 5–17 |
+| 第 27 章 插曲：线程 API | Part II 20–31 | 第 37 章 硬盘驱动器 | Part III 18–33 |
+| 第 28 章 锁 | Part II 32–53 | 第 38 章 廉价冗余磁盘阵列（RAID） | Part III 34–51 |
+| 第 29 章 基于锁的并发数据结构 | Part II 54–67 | 第 39 章 插曲：文件和目录 | Part III 52–77 |
+| 第 30 章 条件变量 | Part II 68–83 | 第 40 章 文件系统实现 | Part III 78–95 |
+| 第 31 章 信号量 | Part II 84–101 | 第 41 章 局部性与快速文件系统 | Part III 96–109 |
+| 第 32 章 常见并发问题 | Part II 102–117 | 第 42 章 崩溃一致性：FSCK 与日志 | Part III 110–130 |
+| 第 33 章 基于事件的并发 | Part II 118–128 | 第 43 章 日志结构文件系统 | Part III 131–146 |
+| 第 34 章 并发总结对话 | Part II 129–130 | 第 44 章 基于闪存的 SSD | Part III 147–170 |
+| | | 第 45 章 数据完整性与保护 | Part III 171–183 |
+| | | 第 46 章 持久化总结对话 | Part III 184–185 |
+| | | 第 47 章 关于分布式的对话 | Part III 186–187 |
+| | | 第 48 章 分布式系统 | Part III 188–203 |
+| | | 第 49 章 Sun 网络文件系统（NFS） | Part III 204–221 |
+| | | 第 50 章 Andrew 文件系统（AFS） | Part III 222–235 |
+| | | 第 51 章 分布式总结对话 | Part III 236–237 |
+
+本项目将同一 `ostep part3.pdf` 中的第 47~51 章“分布式系统”与附录 A~H 均纳入翻译范围。
+
+| 附录 | 标题 | Part III PDF 页 |
+|---|---|---:|
+| A | 关于虚拟机监控器的对话 | 238 |
+| B | 虚拟机监控器 | 239–251 |
+| C | 关于管程的对话 | 252 |
+| D | 管程（已弃用） | 253–265 |
+| E | 关于实验的对话 | 266–267 |
+| F | 实验：教程 | 268–279 |
+| G | 实验：系统项目 | 280–283 |
+| H | 实验：xv6 项目 | 284–286 |
+
 > 已核实全部章节区间；`extract.ps1` 抽取某一章时会多带出下一章的起始页，翻译时忽略即可。
 
 ---
 
 ## 6. 风格与术语（详见 `style-guide.md` / `glossary.md`）
+
+> `docs/style-guide.md` 仅供本地协作使用，已列入 `.gitignore`。不得使用 `git add -f` 强制加入，
+> 不得让它出现在任何 commit、发布站点导航或公开页面链接中。
 
 作者旧稿（`ostep-ch.docx`，仅并发部分）确立的语气基线——**请模仿**：
 

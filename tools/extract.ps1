@@ -3,6 +3,7 @@
 #
 # 用法：
 #   powershell -ExecutionPolicy Bypass -File .\tools\extract.ps1 -Chapter 4
+#   powershell -ExecutionPolicy Bypass -File .\tools\extract.ps1 -Appendix A
 #   powershell -ExecutionPolicy Bypass -File .\tools\extract.ps1 -Chapter 4 -StartPage 47 -EndPage 57
 #   powershell -ExecutionPolicy Bypass -File .\tools\extract.ps1 -Chapter 4 -IncludeLayout
 #
@@ -10,11 +11,15 @@
 #   raw\chNN.txt           普通抽取（含分页符 \f）
 #   raw\chNN.layout.txt    -layout 抽取（含分页符 \f）
 #   chNN.pages.txt         用分页符切分、每页带页码标记，便于逐页翻译
+#   appX.pages.txt         附录的对应分页文件
 #
 # 页区间默认取自 AGENTS.md §5 的映射表；不确定时可显式传 -StartPage/-EndPage。
 
+[CmdletBinding(DefaultParameterSetName = "Chapter")]
 param(
-    [Parameter(Mandatory = $true)][int]$Chapter,
+    [Parameter(Mandatory = $true, ParameterSetName = "Chapter")][int]$Chapter,
+    [Parameter(Mandatory = $true, ParameterSetName = "Appendix")]
+    [ValidateSet("A", "B", "C", "D", "E", "F", "G", "H")][string]$Appendix,
     [int]$StartPage = 0,
     [int]$EndPage = 0,
     [switch]$IncludeLayout
@@ -26,7 +31,9 @@ $ErrorActionPreference = "Stop"
 $PdfText = "D:\texlive\2026\bin\windows\pdftotext.exe"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 $SourceRoot = Split-Path -Parent $ProjectRoot
-$Pdf = if ($Chapter -le 24) {
+$Pdf = if ($PSCmdlet.ParameterSetName -eq "Appendix") {
+    Join-Path $SourceRoot "ostep part3.pdf"
+} elseif ($Chapter -le 24) {
     Join-Path $SourceRoot "ostep part1.pdf"
 } elseif ($Chapter -le 34) {
     Join-Path $SourceRoot "ostep part2.pdf"
@@ -50,15 +57,30 @@ $PageMap = @{
     25 = @(3, 4);      26 = @(5, 19);    27 = @(20, 31);   28 = @(32, 53)
     29 = @(54, 67);    30 = @(68, 83);   31 = @(84, 101);  32 = @(102, 117)
     33 = @(118, 128);  34 = @(129, 130)
+    35 = @(3, 4);       36 = @(5, 17);     37 = @(18, 33);    38 = @(34, 51)
+    39 = @(52, 77);     40 = @(78, 95);    41 = @(96, 109);   42 = @(110, 130)
+    43 = @(131, 146);   44 = @(147, 170);  45 = @(171, 183);  46 = @(184, 185)
+    47 = @(186, 187);   48 = @(188, 203);  49 = @(204, 221);  50 = @(222, 235)
+    51 = @(236, 237)
+}
+
+$AppendixMap = @{
+    "A" = @(238, 238); "B" = @(239, 251); "C" = @(252, 252); "D" = @(253, 265)
+    "E" = @(266, 267); "F" = @(268, 279); "G" = @(280, 283); "H" = @(284, 286)
 }
 
 if ($StartPage -le 0 -or $EndPage -le 0) {
-    if (-not $PageMap.ContainsKey($Chapter)) { throw "无第 $Chapter 章的默认页区间，请显式传 -StartPage/-EndPage" }
-    $StartPage = $PageMap[$Chapter][0]
-    $EndPage   = $PageMap[$Chapter][1]
+    if ($PSCmdlet.ParameterSetName -eq "Appendix") {
+        $StartPage = $AppendixMap[$Appendix][0]
+        $EndPage   = $AppendixMap[$Appendix][1]
+    } else {
+        if (-not $PageMap.ContainsKey($Chapter)) { throw "无第 $Chapter 章的默认页区间，请显式传 -StartPage/-EndPage" }
+        $StartPage = $PageMap[$Chapter][0]
+        $EndPage   = $PageMap[$Chapter][1]
+    }
 }
 
-$chTag = "ch{0:D2}" -f $Chapter
+$chTag = if ($PSCmdlet.ParameterSetName -eq "Appendix") { "app$Appendix" } else { "ch{0:D2}" -f $Chapter }
 $rawDir = Join-Path $ProjectRoot "extraction\raw"
 New-Item -ItemType Directory -Force -Path $rawDir | Out-Null
 
